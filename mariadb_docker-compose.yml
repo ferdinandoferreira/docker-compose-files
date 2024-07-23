@@ -1,0 +1,33 @@
+services:
+  db:
+    image: mariadb
+    container_name: mariadb
+    restart: always
+    ports:
+    - "3306:3306"
+    environment:
+      MARIADB_DATABASE: openticket
+      MARIADB_USER: ferdinando
+      MARIADB_PASSWORD: ferdinando
+      MARIADB_RANDOM_ROOT_PASSWORD: 'yes'
+      #MARIADB_ROOT_PASSWORD: example
+      #MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: '1'
+    volumes:
+      - ./mariadb:/var/lib/mysql
+
+  # adminer:
+  #   image: adminer
+  #   container_name: adminer
+  #   restart: always
+  #   ports:
+  #     - "8080:8080"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      PMD_HOST: db
+      PMD_USER: ferdinando
+      PMD_PASSWORD: ferdinando
+    ports:
+      - "8080:80"
