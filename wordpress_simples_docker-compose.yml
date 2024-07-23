@@ -1,0 +1,33 @@
+services:
+
+  wordpress:
+    image: wordpress
+    container_name: wordpress
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: openticket
+      WORDPRESS_DB_USER: openticket
+      WORDPRESS_DB_PASSWORD: openticket
+    volumes:
+      - ./wordpress:/var/www/html
+
+  db:
+    image: mariadb
+    container_name: mariadb
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MARIADB_DATABASE: openticket
+      MARIADB_USER: openticket
+      MARIADB_PASSWORD: openticket
+      MARIADB_RANDOM_ROOT_PASSWORD: 'yes'
+    volumes:
+      - ./db:/var/lib/mysql
+
+# volumes:
+#   wordpress:
+#   db:

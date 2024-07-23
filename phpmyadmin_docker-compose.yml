@@ -1,0 +1,28 @@
+services:
+
+  db:
+    image: mysql:8.0
+    container_name: "MySql"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: exAe#7895.
+      MYSQL_DATABASE: openticket
+      MYSQL_USER: ferdinando
+      MYSQL_PASSWORD: passFerdinando
+    ports:
+      - "3306:3306"
+    volumes:
+      - db:/var/lib/mysql
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      PMD_HOST: db
+      PMD_USER: ferdinando
+      PMD_PASSWORD: passFerdinando
+    ports:
+      - "8080:80"
+
+volumes:
+  db:
